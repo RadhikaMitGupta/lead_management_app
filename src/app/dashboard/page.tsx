@@ -1,5 +1,5 @@
  "use client";
-import React, { useState } from "react";
+import React, { useState,useRef ,useEffect} from "react";
 import ChatBot from "@/component/ChatBot";
 
 /* ================= TYPES ================= */
@@ -78,10 +78,49 @@ const FILTERS: FilterConfig[] = [
   },
 ];
 
+const imageData1 = [
+ {
+  id:"1",
+  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s",
+ },
+  {
+  id:"2",
+  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s",
+ },
+
+  {
+  id:"3",
+  uimgUrl:  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s",
+ },
+  {
+  id:"4",
+  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTstFipeZsz31ECECmirjMkvkiLSqsvAYlaw&s",
+ },
+]
+const imageData2 = [
+ {
+  id:"5",
+  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsEVV-poXoR9ipe-fN17-EO2dNanl7iwetQ&s",
+ },
+
+  {
+  id:"6",
+  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s",
+ }, {
+  id:"7",
+  uimgUrl: "https://gplwebsitecdnblob.blob.core.windows.net/godrej-cdn/Images/09ced807-183d-4da9-b54d-85dea9a57499.webp",
+ },
+  {
+  id:"8",
+  uimgUrl: "https://gplwebsitecdnblob.blob.core.windows.net/godrej-cdn/Images/0e3f30bb-5955-4073-a75b-5107d5172a5e.webp"
+ },
+]
+
 /* ================= DASHBOARD ================= */
 const Dashboard = () => {
   const [openDropdown, setOpenDropdown] = useState<FilterKey | null>(null);
-  const [submitted,setSubmitted] = useState(false)
+  const [submitted,setSubmitted] = useState(false) 
+  const [isClicked,setisClicked] = useState(true)
   const [selectedFilters, setSelectedFilters] = useState<
     Record<FilterKey, Option[]>
   >({
@@ -90,8 +129,25 @@ const Dashboard = () => {
     C: [],
     D: [],
   });
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setOpenDropdown(null);
+    }
+  };
 
-  console.log("selectedFilters4564",selectedFilters)
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+
 
   const toggleDropdown = (key: FilterKey) => {
     setOpenDropdown((prev) => (prev === key ? null : key));
@@ -153,6 +209,7 @@ const Dashboard = () => {
           <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 }} onClick={()=>{
             // alert("Submited")
             setSubmitted(true)
+           setisClicked((prev)=> !prev)
           } } >
         Search Properties
       </button>
@@ -173,33 +230,32 @@ const Dashboard = () => {
         paddingLeft: 20, paddingRight:20,
         justifyContent: "center", // horizontal center
         alignItems: "center", }}>
-       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s"
+          {isClicked &&  imageData1.map((elem)=>{
+            return (
+               <img
+        src={elem?.uimgUrl}
         alt="My image"
         style={{ width: "23%", height: 300, borderRadius: 4,objectFit: "cover", }}
       />
-        <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s"
+            )
+          }) }
+
+            {!isClicked &&  imageData2.map((elem)=>{
+            return (
+               <img
+        src={elem?.uimgUrl}
         alt="My image"
-        style={{ width:  "23%", height: 300, borderRadius:4, objectFit: "cover",}}
+        style={{ width: "23%", height: 300, borderRadius: 4,objectFit: "cover", }}
       />
-        <img
-        src="https://cdn.pixabay.com/photo/2022/06/02/11/33/dubai-7237750_1280.jpg"
-        alt="My image"
-        style={{ width: "23%", height: 300, borderRadius:4, objectFit: "cover", }}
-      />
-        <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq-JE-PfaaYWtiQHbZ-hTH5vqGb5YZnwAw1w&s"
-        alt="My image"
-        style={{ width:  "23%", height: 300, borderRadius:4, objectFit: "cover", }}
-      />
+            )
+          }) }
 
       </div>
           )}
-    
-
       {/* CHATBOT */}
-      <ChatBot />
+    
+      <Footer />
+        <ChatBot />
     </div>
   );
 };
@@ -258,6 +314,21 @@ const MultiSelectDropdown = ({
         </div>
       ))}
     </div>
+  );
+};
+
+const Footer = () => {
+  return (
+    <footer style={styles.footer}>
+      <div style={styles.container}>
+        <p style={styles.text}>
+          © {new Date().getFullYear()} Lead Management App
+        </p>
+        <p style={styles.text}>
+          Address: JP Nagar, Bengaluru, Karnataka, India
+        </p>
+      </div>
+    </footer>
   );
 };
 
@@ -339,6 +410,31 @@ remove: {
   cursor: "pointer",
   fontWeight: "bold",
 },
+
+footer: {
+  backgroundColor: "#f3f4f6",
+  padding: "20px 0",
+  marginTop: 60,
+
+  position: "fixed",
+  bottom: 0,
+  left: 0,        // ⭐ IMPORTANT
+  width: "100%",  // ⭐ IMPORTANT
+
+  textAlign: "center",
+  boxShadow: "0 -2px 6px rgba(0,0,0,0.1)",
+  zIndex: 1000,
+},
+  container: {
+    maxWidth: 1200,
+    margin: "0 auto",
+    textAlign: "center",
+  },
+  text: {
+    color: "#4b5563",
+    fontSize: 14,
+    margin: "4px 0",
+  },
 
 };
 
