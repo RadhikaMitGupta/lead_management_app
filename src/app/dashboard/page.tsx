@@ -151,7 +151,7 @@ const Dashboard = () => {
            <div style={{display:"flex",justifyContent: "center", // horizontal center
   alignItems: "center", }}>
           <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 }} onClick={()=>{
-            alert("Submited")
+            // alert("Submited")
             setSubmitted(true)
           } } >
         Search Properties
