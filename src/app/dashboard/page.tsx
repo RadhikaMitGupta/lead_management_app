@@ -169,7 +169,7 @@ const Dashboard = () => {
       </div>
 
           {submitted &&  (
-              <div style={{display:"flex",flexDirection:"row", backgroundColor:"#D3D3D3", gap: 20,
+              <div style={{display:"flex",flexDirection:"row",  gap: 20,
         paddingLeft: 20, paddingRight:20,
         justifyContent: "center", // horizontal center
         alignItems: "center", }}>
@@ -309,12 +309,13 @@ const styles: Record<string, React.CSSProperties> = {
     paddingRight:20
   },
   textAreaBlock: {
-    padding: 80,
+    padding: 20,
+    paddingLeft:80
   },
   textarea: {
-    width: "100%",
-    height: 200,
-    marginTop: 20,
+    width: "60%",
+    height: 100,
+    marginTop: 10,
     padding: 12,
     borderRadius: 8,
     border: "1px solid #d1d5db",
