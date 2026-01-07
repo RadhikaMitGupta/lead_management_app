@@ -81,7 +81,7 @@ const FILTERS: FilterConfig[] = [
 /* ================= DASHBOARD ================= */
 const Dashboard = () => {
   const [openDropdown, setOpenDropdown] = useState<FilterKey | null>(null);
-
+  const [submitted,setSubmitted] = useState(false)
   const [selectedFilters, setSelectedFilters] = useState<
     Record<FilterKey, Option[]>
   >({
@@ -130,7 +130,7 @@ const Dashboard = () => {
               Click to Select
             </div>
 
-          <div style={{ minHeight: 260,  position: "relative" }}>
+          <div style={{ minHeight: 200,  position: "relative" }}>
           {openDropdown === key && (
             <MultiSelectDropdown
               data={options}
@@ -148,9 +148,19 @@ const Dashboard = () => {
         ))}
       </div>
 
+           <div style={{display:"flex",justifyContent: "center", // horizontal center
+  alignItems: "center", }}>
+          <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 }} onClick={()=>{
+            alert("Submited")
+            setSubmitted(true)
+          } } >
+        Search Properties
+      </button>
+        </div>
+
       {/* TEXTAREA */}
       <div style={styles.textAreaBlock}>
-        <h2>If your criteria does not match above, please write below</h2>
+        <h2>In case your criteria are not covered by the options above, please specify them below.</h2>
 
         <textarea
           placeholder="Type here..."
@@ -158,16 +168,37 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* CHATBOT */}
-        <div style={{display:"flex",justifyContent: "center", // horizontal center
-  alignItems: "center",marginBottom:20 }}>
-          <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 }} onClick={()=> alert("Submited")} >
-        Search Properties
-      </button>
-        </div>
-        
-      
+          {submitted &&  (
+              <div style={{display:"flex",flexDirection:"row", backgroundColor:"#D3D3D3", gap: 20,
+        paddingLeft: 20, paddingRight:20,
+        justifyContent: "center", // horizontal center
+        alignItems: "center", }}>
+       <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s"
+        alt="My image"
+        style={{ width: "23%", height: 300, borderRadius: 4,objectFit: "cover", }}
+      />
+        <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s"
+        alt="My image"
+        style={{ width:  "23%", height: 300, borderRadius:4, objectFit: "cover",}}
+      />
+        <img
+        src="https://cdn.pixabay.com/photo/2022/06/02/11/33/dubai-7237750_1280.jpg"
+        alt="My image"
+        style={{ width: "23%", height: 300, borderRadius:4, objectFit: "cover", }}
+      />
+        <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq-JE-PfaaYWtiQHbZ-hTH5vqGb5YZnwAw1w&s"
+        alt="My image"
+        style={{ width:  "23%", height: 300, borderRadius:4, objectFit: "cover", }}
+      />
+
+      </div>
+          )}
     
+
+      {/* CHATBOT */}
       <ChatBot />
     </div>
   );
@@ -242,7 +273,7 @@ const styles: Record<string, React.CSSProperties> = {
   filtersRow: {
     display: "flex",
   gap: 60,
-  padding: 40,
+  padding: 20,
   justifyContent: "center", // horizontal center
   alignItems: "center",     // vertical center
   },
@@ -252,6 +283,7 @@ const styles: Record<string, React.CSSProperties> = {
   title: {
     fontWeight: 600,
     marginBottom: 10,
+    textAlign:"center"
   },
   dropdownButton: {
     padding: 10,
