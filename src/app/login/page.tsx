@@ -40,7 +40,7 @@ export default function LoginPage() {
               className={styles.input}
               type="name"
               placeholder="Enter Name"
-              maxLength={6}
+              maxLength={30}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />

@@ -159,6 +159,15 @@ const Dashboard = () => {
       </div>
 
       {/* CHATBOT */}
+        <div style={{display:"flex",justifyContent: "center", // horizontal center
+  alignItems: "center",marginBottom:20 }}>
+          <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 }} onClick={()=> alert("Submited")} >
+        Search Properties
+      </button>
+        </div>
+        
+      
+    
       <ChatBot />
     </div>
   );
