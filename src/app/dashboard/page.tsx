@@ -186,7 +186,7 @@ const Dashboard = () => {
               Click to Select
             </div>
 
-          <div style={{ minHeight: 200,  position: "relative" }}>
+          <div style={{ minHeight: 250,  position: "relative" }}>
           {openDropdown === key && (
             <MultiSelectDropdown
               data={options}
