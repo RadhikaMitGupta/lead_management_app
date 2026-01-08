@@ -255,11 +255,17 @@ const Dashboard = () => {
           {isClicked &&  imageData1.map((elem)=>{
             return (
               <div style={{width: "23%", height: 300,marginBottom:120}} >
+                <a
+              href={elem?.uimgUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
                  <img
               src={elem?.uimgUrl}
               alt="My image"
               style={{ width: "100%", height: "100%", borderRadius: 4,objectFit: "cover", }}
             />
+            </a>
             <h1 style={{marginTop:10,textAlign:"center",fontWeight:"700",fontSize:20}}>{elem?.address}</h1>
               </div>
             )
@@ -268,11 +274,17 @@ const Dashboard = () => {
             {!isClicked &&  imageData2.map((elem)=>{
             return (
          <div  style={{width: "100%", height: 300,marginBottom:120}}>
+             <a
+              href={elem?.uimgUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
                  <img
               src={elem?.uimgUrl}
               alt="My image"
               style={{ width: "100%", height: "100%", borderRadius: 4,objectFit: "cover", }}
             />
+            </a>
             <h1 style={{marginTop:10,textAlign:"center",fontWeight:"700",fontSize:20}}>{elem?.address}</h1>
               </div>
             )
