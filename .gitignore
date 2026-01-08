@@ -22,3 +22,24 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#fghfdg
+
+
+# next.js
+/.next
+/out
+/.vercel
+
+ 
+
+# logs
+pnpm-debug.log*
+
+# OS files
+Thumbs.db
+
+# editor
+.vscode/
+.ide
+

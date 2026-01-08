@@ -82,37 +82,46 @@ const imageData1 = [
  {
   id:"1",
   uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s",
+  address:"JP Nagar"
  },
   {
   id:"2",
   uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s",
+  address:"Kormangala"
  },
 
   {
   id:"3",
   uimgUrl:  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s",
+  address:"Indranagr"
  },
   {
   id:"4",
   uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTstFipeZsz31ECECmirjMkvkiLSqsvAYlaw&s",
+  address:"Jayanagar"
  },
 ]
 const imageData2 = [
  {
   id:"5",
   uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsEVV-poXoR9ipe-fN17-EO2dNanl7iwetQ&s",
+  address:"HSR Layout"
  },
 
   {
   id:"6",
   uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s",
- }, {
+  address:"Whitefield"
+ }, 
+ {
   id:"7",
   uimgUrl: "https://gplwebsitecdnblob.blob.core.windows.net/godrej-cdn/Images/09ced807-183d-4da9-b54d-85dea9a57499.webp",
+  address:"Electronic City"
  },
   {
   id:"8",
-  uimgUrl: "https://gplwebsitecdnblob.blob.core.windows.net/godrej-cdn/Images/0e3f30bb-5955-4073-a75b-5107d5172a5e.webp"
+  uimgUrl: "https://gplwebsitecdnblob.blob.core.windows.net/godrej-cdn/Images/0e3f30bb-5955-4073-a75b-5107d5172a5e.webp",
+  address:"Hosur Road"
  },
 ]
 
@@ -170,7 +179,8 @@ const Dashboard = () => {
     <div>
       {/* HEADER */}
       <header style={styles.header}>
-        <h1 style={{ color: "#fff" }}>Dashboard</h1>
+        <h1 style={styles.leftTitle}>Dashboard</h1>
+        <h1 style={styles.rightTitle}>Help & Support</h1>
       </header>
 
       {/* FILTERS */}
@@ -205,13 +215,25 @@ const Dashboard = () => {
       </div>
 
            <div style={{display:"flex",justifyContent: "center", // horizontal center
-  alignItems: "center", }}>
+  alignItems: "center",flexDirection:"row" }}>
           <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 }} onClick={()=>{
             // alert("Submited")
             setSubmitted(true)
            setisClicked((prev)=> !prev)
           } } >
         Search Properties
+      </button>
+       <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 ,marginLeft:10}} onClick={()=>{
+            // alert("Submited")
+            setSubmitted(false)
+        setSelectedFilters({
+          A: [],
+          B: [],
+          C: [],
+          D: [],
+        });
+          } } >
+        Clear 
       </button>
         </div>
 
@@ -227,26 +249,32 @@ const Dashboard = () => {
 
           {submitted &&  (
               <div style={{display:"flex",flexDirection:"row",  gap: 20,
-        paddingLeft: 20, paddingRight:20,
+        paddingLeft: 20, paddingRight:20, marginBottom:50,
         justifyContent: "center", // horizontal center
-        alignItems: "center", }}>
+        alignItems: "center",height:400,}}>
           {isClicked &&  imageData1.map((elem)=>{
             return (
-               <img
-        src={elem?.uimgUrl}
-        alt="My image"
-        style={{ width: "23%", height: 300, borderRadius: 4,objectFit: "cover", }}
-      />
+              <div style={{width: "23%", height: 300,marginBottom:120}} >
+                 <img
+              src={elem?.uimgUrl}
+              alt="My image"
+              style={{ width: "100%", height: "100%", borderRadius: 4,objectFit: "cover", }}
+            />
+            <h1 style={{marginTop:10,textAlign:"center",fontWeight:"700",fontSize:20}}>{elem?.address}</h1>
+              </div>
             )
           }) }
 
             {!isClicked &&  imageData2.map((elem)=>{
             return (
-               <img
-        src={elem?.uimgUrl}
-        alt="My image"
-        style={{ width: "23%", height: 300, borderRadius: 4,objectFit: "cover", }}
-      />
+         <div  style={{width: "100%", height: 300,marginBottom:120}}>
+                 <img
+              src={elem?.uimgUrl}
+              alt="My image"
+              style={{ width: "100%", height: "100%", borderRadius: 4,objectFit: "cover", }}
+            />
+            <h1 style={{marginTop:10,textAlign:"center",fontWeight:"700",fontSize:20}}>{elem?.address}</h1>
+              </div>
             )
           }) }
 
@@ -336,13 +364,27 @@ const Footer = () => {
 
 const styles: Record<string, React.CSSProperties> = {
   header: {
-    textAlign: "center",
-    padding: 20,
+    display: "flex",                // ⭐ KEY
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "16px 24px",
     backgroundColor: "#39b54a",
-    fontWeight: 600,
+  },
+  leftTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: 700,
+    margin: 0,                      // ⭐ IMPORTANT
+  },
+  rightTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: 700,
+    margin: 0,                      // ⭐ IMPORTANT
+    cursor: "pointer",
   },
   filtersRow: {
-    display: "flex",
+  display: "flex",
   gap: 60,
   padding: 20,
   justifyContent: "center", // horizontal center
