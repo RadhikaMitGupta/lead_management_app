@@ -6,6 +6,7 @@ import ChatBot from "@/component/ChatBot";
 type Option = {
   id: string;
   name: string;
+  uimgUrl:string
 };
 
 type FilterKey = "A" | "B" | "C" | "D";
@@ -18,40 +19,40 @@ type FilterConfig = {
 
 /* ================= OPTIONS ================= */
 const LOCATION_OPTIONS: Option[] = [
-  { name: "JP Nagar", id: "1" },
-  { name: "Koramangala", id: "2" },
-  { name: "Indira Nagar", id: "3" },
-  { name: "Jayanagar", id: "4" },
-  { name: "HSR Layout", id: "5" },
-  { name: "Whitefield", id: "6" },
-  { name: "Electronic City", id: "7" },
-  { name: "Hosur Road", id: "8" },
-  { name: "Others", id: "9" },
+  { name: "JP Nagar", id: "1",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Koramangala", id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
+  { name: "Indira Nagar", id: "3",  uimgUrl:  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Jayanagar", id: "4", uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTstFipeZsz31ECECmirjMkvkiLSqsvAYlaw&s", },
+  { name: "HSR Layout", id: "5",  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsEVV-poXoR9ipe-fN17-EO2dNanl7iwetQ&s", },
+  { name: "Whitefield", id: "6",  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Electronic City", id: "7", uimgUrl: "https://gplwebsitecdnblob.blob.core.windows.net/godrej-cdn/Images/09ced807-183d-4da9-b54d-85dea9a57499.webp", },
+  { name: "Hosur Road", id: "8", uimgUrl: "https://gplwebsitecdnblob.blob.core.windows.net/godrej-cdn/Images/0e3f30bb-5955-4073-a75b-5107d5172a5e.webp", },
+  { name: "Others", id: "9",  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTstFipeZsz31ECECmirjMkvkiLSqsvAYlaw&s",},
 ];
 
 const APARTMENT_OPTIONS: Option[] = [
-  { name: "One BHK", id: "1" },
-  { name: "Two BHK", id: "2" },
-  { name: "Three BHK", id: "3" },
-  { name: "Four BHK", id: "4" },
-  { name: "Other", id: "5" },
+  { name: "One BHK", id: "1",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Two BHK",id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
+  { name: "Three BHK", id: "3",  uimgUrl:  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Four BHK", id: "4", uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTstFipeZsz31ECECmirjMkvkiLSqsvAYlaw&s", },
+  { name: "Other", id: "6",  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
 ];
 
 const PRICE_OPTIONS: Option[] = [
-  { name: "Below 50 Lac", id: "1" },
-  { name: "Below 1 Cr", id: "2" },
-  { name: "Below 1.5 Cr", id: "3" },
-  { name: "Below 2 Cr", id: "4" },
-  { name: "Below 3 Cr", id: "5" },
-  { name: "Above 4 Cr", id: "6" },
-  { name: "Other", id: "7" },
+  { name: "Below 50 Lac", id: "1",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Below 1 Cr",id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
+  { name: "Below 1.5 Cr", id: "3",  uimgUrl:  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Below 2 Cr", id: "4", uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTstFipeZsz31ECECmirjMkvkiLSqsvAYlaw&s", },
+  { name: "Below 3 Cr", id: "6",  uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSme0F5ly7luGucfKdrOWfJIm-sS930vsGBHg&s", },
+  { name: "Above 4 Cr", id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
+  { name: "Other",id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
 ];
 
 const AREA_OPTIONS: Option[] = [
-  { name: "Near Metro", id: "1" },
-  { name: "Near Airport", id: "2" },
-  { name: "Near Bus Stop", id: "3" },
-  { name: "Other", id: "4" },
+  { name: "Near Metro",id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
+  { name: "Near Airport",id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
+  { name: "Near Bus Stop",id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
+  { name: "Other",id: "2",uimgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVCdGOI0u0BLHDDj4czDLHvXXgf1E_6kbTuQ&s", },
 ];
 
 /* ================= FILTER CONFIG ================= */
@@ -138,6 +139,7 @@ const Dashboard = () => {
     C: [],
     D: [],
   });
+  console.log("selectedFilters45",selectedFilters.A)
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
@@ -246,17 +248,47 @@ const Dashboard = () => {
           style={styles.textarea}
         />
       </div>
+         {submitted &&  (
+              <div style={{display:"flex",flexDirection:"row",  gap: 20,
+        paddingLeft: 20, paddingRight:20, marginBottom:10,
+        justifyContent: "center", // horizontal center
+        alignItems: "center",height:400,}}>
+
+          {selectedFilters?.A?.map((elem)=>{
+            console.log("elem453",elem)
+            return (
+              <div style={{width: "23%", height: 300,marginBottom:120}} >
+                <a
+              href={`/property/${elem.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+                 <img
+              src={elem?.uimgUrl}
+              alt="My image"
+              style={{ width: "100%", height: "100%", borderRadius: 4,objectFit: "cover", }}
+            />
+            </a>
+            <h1 style={{marginTop:10,textAlign:"center",fontWeight:"700",fontSize:20}}>{elem?.name}</h1>
+              </div>
+            )
+          }) }
+      </div>
+          )}
+
+          {submitted &&  <h1 style={{marginBottom:15,marginLeft:20}}>Recomended Properties</h1>}
 
           {submitted &&  (
               <div style={{display:"flex",flexDirection:"row",  gap: 20,
         paddingLeft: 20, paddingRight:20, marginBottom:50,
         justifyContent: "center", // horizontal center
         alignItems: "center",height:400,}}>
+
           {isClicked &&  imageData1.map((elem)=>{
             return (
               <div style={{width: "23%", height: 300,marginBottom:120}} >
                 <a
-              href={elem?.uimgUrl}
+               href={`/property/${elem.id}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -289,6 +321,7 @@ const Dashboard = () => {
               </div>
             )
           }) }
+
 
       </div>
           )}
