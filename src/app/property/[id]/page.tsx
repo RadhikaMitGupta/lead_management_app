@@ -38,6 +38,20 @@ const ALL_PROPERTIES: Property[] = [
   // add all properties here
 ];
 
+const NOT_INTERESTED_REASONS = [
+  "Price is high for the Unit",
+  "Wanted in Top floors",
+  "Unit Facing is different",
+  "Less Balconies",
+  "Carpet size is less",
+  "Agent unable to explain in details",
+  "No confidence seen in Agent during interaction",
+  "More Flexible payment options needed",
+  "Lesser Amenities at Property",
+  "Property is away from Transport reach",
+  "Property not at strategic place",
+];
+
 type Props = {
   params: {
     id: string;
@@ -121,17 +135,27 @@ const [reason, setReason] = useState("");
 
       <Footer />
            <ChatBot />
-           {showReasonModal && (
+    {showReasonModal && (
   <div style={styles.overlay}>
     <div style={styles.modal}>
-      <h2 style={styles.modalTitle}>Tell us why you’re not interested</h2>
+      <h2 style={styles.modalTitle}>
+        Tell us why you’re not interested
+      </h2>
 
-      <textarea
-        placeholder="Please write your reason..."
+      {/* Dropdown */}
+      <select
         value={reason}
         onChange={(e) => setReason(e.target.value)}
-        style={styles.modalTextarea}
-      />
+        style={styles.modalSelect}
+      >
+        <option value="">Select a reason</option>
+
+        {NOT_INTERESTED_REASONS.map((item, index) => (
+          <option key={index} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
 
       <div style={styles.modalActions}>
         <button
@@ -146,7 +170,7 @@ const [reason, setReason] = useState("");
 
         <button
           style={styles.submitBtn}
-          disabled={!reason.trim()}
+          disabled={!reason}
           onClick={() => {
             console.log("Reason submitted:", reason);
             alert("Thank you for your feedback!");
@@ -160,6 +184,7 @@ const [reason, setReason] = useState("");
     </div>
   </div>
 )}
+
 
     </>
   );
@@ -302,7 +327,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   footer: {
     backgroundColor: "#f3f4f6",
-    padding: "16px 0",
+    padding: "10px 0",
     textAlign: "center",
     boxShadow: "0 -2px 6px rgba(0,0,0,0.1)",
   },
@@ -375,6 +400,16 @@ submitBtn: {
   padding: "8px 16px",
   borderRadius: 6,
   border: "none",
+  cursor: "pointer",
+},
+modalSelect: {
+  width: "100%",
+  padding: "12px",
+  borderRadius: "6px",
+  border: "1px solid #ccc",
+  fontSize: "14px",
+  marginBottom: "20px",
+  outline: "none",
   cursor: "pointer",
 },
 

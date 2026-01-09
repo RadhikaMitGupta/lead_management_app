@@ -140,23 +140,30 @@ const Dashboard = () => {
     D: [],
   });
   console.log("selectedFilters45",selectedFilters.A)
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-  const handleClickOutside = (event: MouseEvent) => {
+const dropdownRefs = useRef<Record<FilterKey, HTMLDivElement | null>>({
+  A: null,
+  B: null,
+  C: null,
+  D: null,
+});
+
+useEffect(() => {
+  const handleClickOutside = (e: MouseEvent) => {
     if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
+      openDropdown &&
+      dropdownRefs.current[openDropdown] &&
+      !dropdownRefs.current[openDropdown]?.contains(e.target as Node)
     ) {
       setOpenDropdown(null);
     }
   };
 
   document.addEventListener("mousedown", handleClickOutside);
-
-  return () => {
+  return () =>
     document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, []);
+}, [openDropdown]);
+
+
 
 
 
@@ -198,26 +205,26 @@ const Dashboard = () => {
               Click to Select
             </div>
 
-          <div style={{ minHeight: 250,  position: "relative" }}>
+          <div  ref={(el) => (dropdownRefs.current[key] = el)} style={{ minHeight: 200,  position: "relative" }}>
           {openDropdown === key && (
-            <MultiSelectDropdown
-              data={options}
-              selected={selectedFilters[key]}
-              onSelect={(item) => handleSelect(key, item)}
-            />
-          )}
-
-          <SelectedChips
+          <MultiSelectDropdown
+            data={options}
+            selected={selectedFilters[key]}
+            onSelect={(item) => handleSelect(key, item)}
+          />
+        )}
+          {openDropdown !== key &&  <SelectedChips
             items={selectedFilters[key]}
             onRemove={(item) => handleSelect(key, item)}
-          />
+          /> }
+         
         </div>
           </div>
         ))}
       </div>
 
            <div style={{display:"flex",justifyContent: "center", // horizontal center
-  alignItems: "center",flexDirection:"row" }}>
+  alignItems: "center",flexDirection:"row", marginTop:0 }}>
           <button style={{backgroundColor:"#39b54a",height:40,width:220,color:"#fff",borderRadius:8 }} onClick={()=>{
             // alert("Submited")
             setSubmitted(true)
@@ -431,7 +438,7 @@ const styles: Record<string, React.CSSProperties> = {
   filtersRow: {
   display: "flex",
   gap: 60,
-  padding: 20,
+  paddingTop: 30,
   justifyContent: "center", // horizontal center
   alignItems: "center",     // vertical center
   },
@@ -457,6 +464,7 @@ const styles: Record<string, React.CSSProperties> = {
     border: "1px solid #d1d5db",
     borderRadius: 6,
     backgroundColor: "#fff",
+    width:240
   },
   dropdownItem: {
     display: "flex",
@@ -468,7 +476,8 @@ const styles: Record<string, React.CSSProperties> = {
   },
   textAreaBlock: {
     padding: 20,
-    paddingLeft:80
+    paddingLeft:80,
+    marginTop:100
   },
   textarea: {
     width: "60%",
@@ -483,14 +492,19 @@ const styles: Record<string, React.CSSProperties> = {
   flexWrap: "wrap",
   gap: 8,
   marginTop: 8,
+  width:240,
+  
+   
+  
+   
 },
 chip: {
   display: "flex",
   alignItems: "center",
-  padding: "6px 10px",
+  padding: "4px 8px",
   backgroundColor: "#e6f7ea",
   borderRadius: 16,
-  fontSize: 13,
+  fontSize: 12,
 },
 remove: {
   marginLeft: 6,
@@ -500,14 +514,12 @@ remove: {
 
 footer: {
   backgroundColor: "#f3f4f6",
-  padding: "20px 0",
+  padding: "10px 0",
   marginTop: 60,
-
   position: "fixed",
   bottom: 0,
   left: 0,        // ⭐ IMPORTANT
   width: "100%",  // ⭐ IMPORTANT
-
   textAlign: "center",
   boxShadow: "0 -2px 6px rgba(0,0,0,0.1)",
   zIndex: 1000,

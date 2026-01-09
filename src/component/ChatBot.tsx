@@ -85,7 +85,7 @@ const ChatBot = () => {
 const styles: Record<string, React.CSSProperties> = {
   fab: {
     position: "fixed",
-    bottom: 20,
+    bottom: 10,
     right: 20,
     width: 56,
     height: 56,
