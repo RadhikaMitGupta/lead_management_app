@@ -248,12 +248,12 @@ const Dashboard = () => {
           style={styles.textarea}
         />
       </div>
+       {submitted &&  <h1 style={{marginBottom:45,marginLeft:20,fontWeight:700,fontSize:20,textAlign:"center"}}>Properties Matching your preference</h1>}
          {submitted &&  (
               <div style={{display:"flex",flexDirection:"row",  gap: 20,
         paddingLeft: 20, paddingRight:20, marginBottom:10,
         justifyContent: "center", // horizontal center
         alignItems: "center",height:400,}}>
-
           {selectedFilters?.A?.map((elem)=>{
             console.log("elem453",elem)
             return (
@@ -276,7 +276,7 @@ const Dashboard = () => {
       </div>
           )}
 
-          {submitted &&  <h1 style={{marginBottom:15,marginLeft:20}}>Recomended Properties</h1>}
+          {submitted &&  <h1 style={{marginBottom:15,marginLeft:20,fontWeight:700,fontSize:20}}>Recomended Properties</h1>}
 
           {submitted &&  (
               <div style={{display:"flex",flexDirection:"row",  gap: 20,

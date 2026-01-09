@@ -48,6 +48,8 @@ export default function PropertyDetails({ params }: Props) {
 //  const { idffffff } = params;
       const [booked, setBooked] = useState(false);
       const [contactOwner,setContactOwner] = useState(false)
+      const [showReasonModal, setShowReasonModal] = useState(false);
+const [reason, setReason] = useState("");
   const paramsc = useParams();
   const idc = paramsc?.id as string;
    console.log("id45654",idc)
@@ -60,11 +62,12 @@ export default function PropertyDetails({ params }: Props) {
  
   const openWhatsApp = () => {
       setContactOwner(true)
+      setShowReasonModal(true)
   const phoneNumber = "919876543210"; // country code + number (no +, no spaces)
-  const message = "Hi, I'm interested in this property. Please contact me.";
+//   const message = "Hi, I'm interested in this property. Please contact me.";
 
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
+//   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+//   window.open(url, "_blank");
 }
 
   return (
@@ -99,10 +102,10 @@ export default function PropertyDetails({ params }: Props) {
                 Book Property
               </button>
                <button
-                style={styles.bookBtn}
+                style={styles.bookBtn1}
                 onClick={openWhatsApp}
               >
-                Contact Owner
+               Not Interested
               </button>
                 </div>
             
@@ -118,6 +121,46 @@ export default function PropertyDetails({ params }: Props) {
 
       <Footer />
            <ChatBot />
+           {showReasonModal && (
+  <div style={styles.overlay}>
+    <div style={styles.modal}>
+      <h2 style={styles.modalTitle}>Tell us why you’re not interested</h2>
+
+      <textarea
+        placeholder="Please write your reason..."
+        value={reason}
+        onChange={(e) => setReason(e.target.value)}
+        style={styles.modalTextarea}
+      />
+
+      <div style={styles.modalActions}>
+        <button
+          style={styles.cancelBtn}
+          onClick={() => {
+            setShowReasonModal(false);
+            setReason("");
+          }}
+        >
+          Cancel
+        </button>
+
+        <button
+          style={styles.submitBtn}
+          disabled={!reason.trim()}
+          onClick={() => {
+            console.log("Reason submitted:", reason);
+            alert("Thank you for your feedback!");
+            setShowReasonModal(false);
+            setReason("");
+          }}
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </>
   );
 }
@@ -240,6 +283,16 @@ const styles: Record<string, React.CSSProperties> = {
     fontWeight: 600,
     cursor: "pointer",
   },
+    bookBtn1: {
+    backgroundColor: "grey",
+    color: "#fff",
+    padding: "12px 24px",
+    borderRadius: 8,
+    border: "none",
+    fontSize: 16,
+    fontWeight: 600,
+    cursor: "pointer",
+  },
   success: {
     backgroundColor: "#ecfdf5",
     color: "#065f46",
@@ -258,5 +311,72 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: 14,
     margin: "4px 0",
   },
+  notInterestedBtn: {
+  backgroundColor: "#ef4444",
+  color: "#fff",
+  padding: "12px 24px",
+  borderRadius: 8,
+  border: "none",
+  fontWeight: 600,
+  cursor: "pointer",
+},
+
+overlay: {
+  position: "fixed",
+  inset: 0,
+  backgroundColor: "rgba(0,0,0,0.5)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 2000,
+},
+
+modal: {
+  backgroundColor: "#fff",
+  borderRadius: 12,
+  width: 420,
+  padding: 24,
+  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+},
+
+modalTitle: {
+  marginBottom: 12,
+  fontSize: 18,
+  fontWeight: 600,
+},
+
+modalTextarea: {
+  width: "100%",
+  height: 100,
+  padding: 12,
+  borderRadius: 8,
+  border: "1px solid #d1d5db",
+  resize: "none",
+},
+
+modalActions: {
+  display: "flex",
+  justifyContent: "flex-end",
+  gap: 12,
+  marginTop: 16,
+},
+
+cancelBtn: {
+  backgroundColor: "#e5e7eb",
+  padding: "8px 16px",
+  borderRadius: 6,
+  border: "none",
+  cursor: "pointer",
+},
+
+submitBtn: {
+  backgroundColor: "#39b54a",
+  color: "#fff",
+  padding: "8px 16px",
+  borderRadius: 6,
+  border: "none",
+  cursor: "pointer",
+},
+
 };
 
