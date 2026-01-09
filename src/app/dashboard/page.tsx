@@ -205,7 +205,10 @@ useEffect(() => {
               Click to Select
             </div>
 
-          <div  ref={(el) => (dropdownRefs.current[key] = el)} style={{ minHeight: 200,  position: "relative" }}>
+          <div  ref={(el) => {
+  dropdownRefs.current[key] = el;
+}}
+           style={{ minHeight: 200,  position: "relative" }}>
           {openDropdown === key && (
           <MultiSelectDropdown
             data={options}
