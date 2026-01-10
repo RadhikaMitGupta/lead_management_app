@@ -63,6 +63,8 @@ export default function PropertyDetails({ params }: Props) {
       const [booked, setBooked] = useState(false);
       const [contactOwner,setContactOwner] = useState(false)
       const [showReasonModal, setShowReasonModal] = useState(false);
+      const [selectedReasons, setSelectedReasons] = useState<string[]>([]);
+
 const [reason, setReason] = useState("");
   const paramsc = useParams();
   const idc = paramsc?.id as string;
@@ -83,6 +85,14 @@ const [reason, setReason] = useState("");
 //   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 //   window.open(url, "_blank");
 }
+const toggleReason = (reason: string) => {
+  setSelectedReasons((prev) =>
+    prev.includes(reason)
+      ? prev.filter((r) => r !== reason)
+      : [...prev, reason]
+  );
+};
+
 
   return (
     <>
@@ -135,34 +145,33 @@ const [reason, setReason] = useState("");
 
       <Footer />
            <ChatBot />
-    {showReasonModal && (
+ {showReasonModal && (
   <div style={styles.overlay}>
     <div style={styles.modal}>
       <h2 style={styles.modalTitle}>
         Tell us why you’re not interested
       </h2>
 
-      {/* Dropdown */}
-      <select
-        value={reason}
-        onChange={(e) => setReason(e.target.value)}
-        style={styles.modalSelect}
-      >
-        <option value="">Select a reason</option>
-
+      {/* CHECKBOX LIST */}
+      <div style={styles.checkboxContainer}>
         {NOT_INTERESTED_REASONS.map((item, index) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
+          <label key={index} style={styles.checkboxItem}>
+            <input
+              type="checkbox"
+              checked={selectedReasons.includes(item)}
+              onChange={() => toggleReason(item)}
+            />
+            <span style={{ marginLeft: 8 }}>{item}</span>
+          </label>
         ))}
-      </select>
+      </div>
 
       <div style={styles.modalActions}>
         <button
           style={styles.cancelBtn}
           onClick={() => {
             setShowReasonModal(false);
-            setReason("");
+            setSelectedReasons([]);
           }}
         >
           Cancel
@@ -170,12 +179,12 @@ const [reason, setReason] = useState("");
 
         <button
           style={styles.submitBtn}
-          disabled={!reason}
+          disabled={selectedReasons.length === 0}
           onClick={() => {
-            console.log("Reason submitted:", reason);
-            alert("Thank you for your feedback!");
+            console.log("Reasons submitted:", selectedReasons);
+            alert("Thank you for your feedback! Our team will review it.");
             setShowReasonModal(false);
-            setReason("");
+            setSelectedReasons([]);
           }}
         >
           Submit
@@ -184,6 +193,7 @@ const [reason, setReason] = useState("");
     </div>
   </div>
 )}
+
 
 
     </>
@@ -412,6 +422,21 @@ modalSelect: {
   outline: "none",
   cursor: "pointer",
 },
+checkboxContainer: {
+  display: "flex",
+  flexDirection: "column",
+  gap: 12,
+  marginTop: 16,
+  marginBottom: 20,
+},
+
+checkboxItem: {
+  display: "flex",
+  alignItems: "center",
+  fontSize: 14,
+  cursor: "pointer",
+},
+
 
 };
 

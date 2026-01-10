@@ -185,14 +185,17 @@ useEffect(() => {
   };
 
   return (
-    <div>
+    <div style={{backgroundColor:"#fff"}}>
       {/* HEADER */}
       <header style={styles.header}>
         <h1 style={styles.leftTitle}>Dashboard</h1>
+         <h1 style={styles.centerTitle}>Welcome To NK-Property</h1>
         <h1 style={styles.rightTitle}>Help & Support</h1>
+        
       </header>
 
       {/* FILTERS */}
+     
       <div style={styles.filtersRow}>
         {FILTERS.map(({ key, title, options }) => (
           <div key={key} style={styles.filterBlock}>
@@ -433,6 +436,13 @@ const styles: Record<string, React.CSSProperties> = {
   },
   rightTitle: {
     color: "#fff",
+    fontSize: 20,
+    fontWeight: 700,
+    margin: 0,                      // ⭐ IMPORTANT
+    cursor: "pointer",
+  },
+  centerTitle:{
+     color: "#fff",
     fontSize: 20,
     fontWeight: 700,
     margin: 0,                      // ⭐ IMPORTANT
